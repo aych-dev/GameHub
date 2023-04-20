@@ -5,9 +5,10 @@ import {
   Switch,
   InputLeftElement,
   InputGroup,
+  useColorMode,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import gameHubIcon from '../Images/gamehublogo.webp';
+import gameHubIcon from '../Navbar/gamehublogo.webp';
 import styled from 'styled-components';
 import { Search2Icon } from '@chakra-ui/icons';
 
@@ -16,9 +17,7 @@ const DarkModeText = styled.p`
 `;
 
 const Navbar = () => {
-  const [toggleDarkMode, setToggleDarkMode] = useState(false);
-
-  console.log(toggleDarkMode);
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <>
@@ -30,7 +29,8 @@ const Navbar = () => {
         </InputGroup>
         <Switch
           id='darkMode'
-          onChange={() => setToggleDarkMode(!toggleDarkMode)}
+          onChange={toggleColorMode}
+          isChecked={colorMode === 'dark'}
         />
         <DarkModeText>Dark Mode</DarkModeText>
       </Flex>

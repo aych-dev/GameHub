@@ -1,5 +1,5 @@
 import { Container } from '@chakra-ui/react';
-import Navbar from './Components/Navbar';
+import Navbar from './Components/Navbar/Navbar';
 import './index.css';
 
 function App() {
