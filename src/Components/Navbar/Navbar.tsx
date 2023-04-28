@@ -7,7 +7,6 @@ import {
   InputGroup,
   useColorMode,
 } from '@chakra-ui/react';
-import { useState } from 'react';
 import gameHubIcon from '../Navbar/gamehublogo.webp';
 import styled from 'styled-components';
 import { Search2Icon } from '@chakra-ui/icons';
@@ -28,6 +27,7 @@ const Navbar = () => {
           <Input placeholder='Search Games...' />
         </InputGroup>
         <Switch
+          colorScheme='green'
           id='darkMode'
           onChange={toggleColorMode}
           isChecked={colorMode === 'dark'}
