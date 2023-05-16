@@ -1,7 +1,9 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import GameIcons from './GameIcons';
 import { Games } from '../../Hooks/useGames';
+import styled from 'styled-components';
+import CriticScore from './CriticScore';
 import {
   Card,
   CardBody,
@@ -9,7 +11,14 @@ import {
   Skeleton,
   Image,
   SimpleGrid,
+  Center,
 } from '@chakra-ui/react';
+
+const PlatformContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 const GameCard = () => {
   const [gameData, setGameData] = useState<Games[]>([]);
@@ -19,9 +28,7 @@ const GameCard = () => {
   useEffect(() => {
     const getGameData = async () => {
       try {
-        const { data } = await axios.get(
-          'https://api.rawg.io/api/games?key=2c33ead7c9764d3fba6ff2f73e657b0a'
-        );
+        const { data } = await axios.get('http://localhost:8000/api');
         setGameData(data.results);
         setIsLoading(!isLoading);
       } catch (err) {
@@ -32,16 +39,21 @@ const GameCard = () => {
     getGameData();
   }, []);
 
-  console.log(isLoading);
+  console.log(gameData);
 
   const gameCard = gameData.map((data) => (
     <Skeleton key={data.id} isLoaded={isLoading}>
-      <Card marginTop={2}>
-        <Image src={data.background_image} />
-        <CardHeader>{data.name}</CardHeader>
+      <Card borderTopRadius='20px' marginTop={2}>
+        <Image borderTopRadius='20px' src={data.background_image} />
         <CardBody>
-          <GameIcons platform={data.parent_platforms.map((p) => p.platform)} />
+          <PlatformContainer>
+            <GameIcons
+              platform={data.parent_platforms.map((p) => p.platform)}
+            />
+            <CriticScore metacritic={data.metacritic} />
+          </PlatformContainer>
         </CardBody>
+        <CardHeader>{data.name}</CardHeader>
       </Card>
     </Skeleton>
   ));

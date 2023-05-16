@@ -11,13 +11,10 @@ import { SiNintendo } from 'react-icons/si';
 import { Icon } from '@chakra-ui/react';
 import { Platform } from '../../Hooks/useGames';
 import { IconType } from 'react-icons';
-import styled from 'styled-components';
 
 interface Props {
   platform: Platform[];
 }
-
-const PlatformContainer = styled.div``;
 
 const GameIcons = ({ platform }: Props) => {
   const iconKey: { [key: string]: IconType } = {
@@ -31,11 +28,11 @@ const GameIcons = ({ platform }: Props) => {
     nintendo: SiNintendo,
   };
 
-  const platformData: any = platform.map((p) => {
-    return <Icon marginX={1} key={p.id} as={iconKey[p.slug]} />;
-  });
+  const platformData: any = platform.map((p) => (
+    <Icon marginTop={1} marginRight={1} key={p.id} as={iconKey[p.slug]} />
+  ));
 
-  return <PlatformContainer>{platformData}</PlatformContainer>;
+  return <div>{platformData}</div>;
 };
 
 export default GameIcons;
