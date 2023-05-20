@@ -23,7 +23,12 @@ const GameCard = () => {
   const gameCard = games.map((data) => (
     <Skeleton key={data.id} isLoaded={isLoading}>
       <Card borderTopRadius='20px' marginTop={2}>
-        <Image borderTopRadius='20px' src={data.background_image} />
+        <Image
+          borderTopRadius='20px'
+          boxSize={'300px'}
+          objectFit={'cover'}
+          src={data.background_image}
+        />
         <CardBody>
           <PlatformContainer>
             <GameIcons
