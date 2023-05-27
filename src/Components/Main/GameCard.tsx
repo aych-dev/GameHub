@@ -7,6 +7,7 @@ import {
   CardBody,
   CardHeader,
   Skeleton,
+  SkeletonText,
   Image,
   SimpleGrid,
 } from '@chakra-ui/react';
@@ -18,26 +19,29 @@ const PlatformContainer = styled.div`
 `;
 
 const GameCard = () => {
-  const { games, isLoading } = useGames();
+  const { data, isLoading } = useGames();
 
-  const gameCard = games.map((data) => (
-    <Skeleton key={data.id} isLoaded={isLoading}>
+  console.log(data);
+
+  const gameCard = data.map((game) => (
+    <Skeleton key={game.id} isLoaded={isLoading}>
       <Card borderTopRadius='20px' marginTop={2}>
         <Image
           borderTopRadius='20px'
           boxSize={'300px'}
           objectFit={'cover'}
-          src={data.background_image}
+          src={game.background_image}
         />
         <CardBody>
+          <SkeletonText isLoaded={isLoading} />
           <PlatformContainer>
             <GameIcons
-              platform={data.parent_platforms.map((p) => p.platform)}
+              platform={game.parent_platforms.map((p) => p.platform)}
             />
-            <CriticScore metacritic={data.metacritic} />
+            <CriticScore metacritic={game.metacritic} />
           </PlatformContainer>
         </CardBody>
-        <CardHeader>{data.name}</CardHeader>
+        <CardHeader>{game.name}</CardHeader>
       </Card>
     </Skeleton>
   ));

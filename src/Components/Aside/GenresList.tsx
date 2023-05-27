@@ -1,24 +1,36 @@
 import React from 'react';
 import useGenres from '../../Hooks/useGenres';
-import { ListItem, Spinner, UnorderedList } from '@chakra-ui/react';
+import { List, ListIcon, ListItem, Spinner, Button } from '@chakra-ui/react';
+import { Genres } from '../../Hooks/useGenres';
+import { log } from 'console';
+
+interface Props {
+  selectedGenre: (genre: Genres) => void;
+}
 
 const GenresList = () => {
-  const { genres, error, isLoading } = useGenres();
+  const { data, error, isLoading } = useGenres();
 
-  const genreElement = genres.map((genre) => {
+  const genreElement = data.map((genre) => {
     return (
-      <>
-        <ListItem key={genre.id}>{genre.name}</ListItem>
-      </>
+      <ListItem key={genre.id}>
+        <ListIcon
+          as={'img'}
+          src={genre.image_background}
+          boxSize={9}
+          marginRight={2}
+        />
+        <Button>{genre.name}</Button>
+      </ListItem>
     );
   });
 
   return (
     <>
-      {isLoading ? (
+      {isLoading === false ? (
         <Spinner></Spinner>
       ) : (
-        <UnorderedList marginTop={2}>{genreElement}</UnorderedList>
+        <List marginTop={2}>{genreElement}</List>
       )}
     </>
   );

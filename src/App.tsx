@@ -3,6 +3,8 @@ import Navbar from './Components/Navbar/Navbar';
 import './index.css';
 import GameCard from './Components/Main/GameCard';
 import GenresList from './Components/Aside/GenresList';
+import { Genres } from './Hooks/useGenres';
+import { useState } from 'react';
 
 function App() {
   return (
