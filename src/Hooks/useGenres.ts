@@ -1,5 +1,3 @@
-import axios, { AxiosError } from 'axios';
-import { useState, useEffect } from 'react';
 import useData from './useData';
 
 export interface Genres {

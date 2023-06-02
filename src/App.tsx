@@ -3,10 +3,14 @@ import Navbar from './Components/Navbar/Navbar';
 import './index.css';
 import GameCard from './Components/Main/GameCard';
 import GenresList from './Components/Aside/GenresList';
-import { Genres } from './Hooks/useGenres';
 import { useState } from 'react';
+import { Genres } from './Hooks/useGenres';
 
 function App() {
+  const [selectedGenre, setSelectedGenre] = useState<Genres | null>(null);
+
+  console.log(selectedGenre);
+
   return (
     <Container maxW={'container.xl'}>
       <Grid
@@ -18,10 +22,10 @@ function App() {
           <Navbar />
         </GridItem>
         <GridItem area={'main'}>
-          <GameCard />
+          <GameCard selectedGenre={selectedGenre} />
         </GridItem>
         <GridItem area={'aside'}>
-          <GenresList />
+          <GenresList onSelectGenre={(genre) => setSelectedGenre(genre)} />
         </GridItem>
       </Grid>
     </Container>

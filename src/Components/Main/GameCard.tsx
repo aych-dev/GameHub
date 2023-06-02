@@ -1,5 +1,5 @@
 import GameIcons from './GameIcons';
-import useGames, { Games } from '../../Hooks/useGames';
+import useGames from '../../Hooks/useGames';
 import styled from 'styled-components';
 import CriticScore from './CriticScore';
 import {
@@ -11,6 +11,7 @@ import {
   Image,
   SimpleGrid,
 } from '@chakra-ui/react';
+import { Genres } from '../../Hooks/useGenres';
 
 const PlatformContainer = styled.div`
   display: flex;
@@ -18,10 +19,12 @@ const PlatformContainer = styled.div`
   justify-content: space-between;
 `;
 
-const GameCard = () => {
-  const { data, isLoading } = useGames();
+interface Props {
+  selectedGenre: Genres | null;
+}
 
-  console.log(data);
+const GameCard = ({ selectedGenre }: Props) => {
+  const { data, isLoading } = useGames(selectedGenre);
 
   const gameCard = data.map((game) => (
     <Skeleton key={game.id} isLoaded={isLoading}>
