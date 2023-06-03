@@ -10,8 +10,11 @@ import {
   SkeletonText,
   Image,
   SimpleGrid,
+  Flex,
+  Text,
 } from '@chakra-ui/react';
 import { Genres } from '../../Hooks/useGenres';
+import { FaSleigh } from 'react-icons/fa';
 
 const PlatformContainer = styled.div`
   display: flex;
@@ -26,7 +29,14 @@ interface Props {
 const GameCard = ({ selectedGenre }: Props) => {
   const { data, isLoading } = useGames(selectedGenre);
 
-  const gameCard = data.map((game) => (
+  const filteredGames = data.filter((game) => {
+    if (selectedGenre) {
+      return game.genres.some((genre) => genre.id === selectedGenre.id);
+    }
+    return true;
+  });
+
+  const gameCard = filteredGames.map((game) => (
     <Skeleton key={game.id} isLoaded={isLoading}>
       <Card borderTopRadius='20px' marginTop={2}>
         <Image
@@ -51,9 +61,22 @@ const GameCard = ({ selectedGenre }: Props) => {
 
   return (
     <>
-      <SimpleGrid columns={4} spacing={5}>
-        {gameCard}
-      </SimpleGrid>
+      {isLoading === false ? (
+        <Skeleton />
+      ) : filteredGames.length > 0 ? (
+        <SimpleGrid columns={4} spacing={5}>
+          {gameCard}
+        </SimpleGrid>
+      ) : (
+        <Flex align={'center'}>
+          <Card borderTopRadius='20px' marginTop={2}>
+            <CardHeader>No Data</CardHeader>
+            <CardBody>
+              <Text>Select Different Genre</Text>
+            </CardBody>
+          </Card>
+        </Flex>
+      )}
     </>
   );
 };
