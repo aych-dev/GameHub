@@ -5,6 +5,7 @@ import GameCard from './Components/Main/GameCard';
 import GenresList from './Components/Aside/GenresList';
 import { useState } from 'react';
 import { Genres } from './Hooks/useGenres';
+import PlatformMenu from './Components/Main/PlatformMenu';
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genres | null>(null);
@@ -20,6 +21,7 @@ function App() {
           <Navbar />
         </GridItem>
         <GridItem area={'main'}>
+          <PlatformMenu />
           <GameCard selectedGenre={selectedGenre} />
         </GridItem>
         <GridItem area={'aside'}>
