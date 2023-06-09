@@ -30,3 +30,14 @@ app.get('/genres', async (req, res) => {
     console.error('Error in genres');
   }
 });
+
+app.get('/platforms/lists/parents', async (req, res) => {
+  try {
+    const { data } = await axios.get(
+      `https://api.rawg.io/api/platforms/lists/parents?key=${process.env.API_KEY}`
+    );
+    res.json(data);
+  } catch (err) {
+    console.error('Error in genres');
+  }
+});
