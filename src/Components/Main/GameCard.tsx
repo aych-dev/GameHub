@@ -14,7 +14,6 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Genres } from '../../Hooks/useGenres';
-import { FaSleigh } from 'react-icons/fa';
 
 const PlatformContainer = styled.div`
   display: flex;
@@ -28,6 +27,7 @@ interface Props {
 
 const GameCard = ({ selectedGenre }: Props) => {
   const { data, isLoading } = useGames(selectedGenre);
+  console.log(data);
 
   const filteredGames = data.filter((game) => {
     if (selectedGenre) {
