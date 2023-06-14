@@ -6,9 +6,17 @@ import GenresList from './Components/Aside/GenresList';
 import { useState } from 'react';
 import { Genres } from './Hooks/useGenres';
 import PlatformMenu from './Components/Main/PlatformMenu';
+import { Platform } from './Hooks/useGames';
+
+export interface GameQuery {
+  genre: Genres | null;
+  platform: Platform | null;
+}
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genres | null>(null);
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+
+  console.log(gameQuery);
 
   return (
     <Container maxW={'container.xl'}>
@@ -21,13 +29,18 @@ function App() {
           <Navbar />
         </GridItem>
         <GridItem area={'main'}>
-          <PlatformMenu />
-          <GameCard selectedGenre={selectedGenre} />
+          <PlatformMenu
+            selectedPlatform={gameQuery.platform}
+            onSelectedPlatform={(platform) =>
+              setGameQuery({ ...gameQuery, platform })
+            }
+          />
+          <GameCard gameQuery={gameQuery} />
         </GridItem>
         <GridItem area={'aside'}>
           <GenresList
-            selectedGenre={selectedGenre}
-            onSelectGenre={(genre) => setSelectedGenre(genre)}
+            selectedGenre={gameQuery.genre}
+            onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
           />
         </GridItem>
       </Grid>

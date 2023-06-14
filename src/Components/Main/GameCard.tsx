@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { Genres } from '../../Hooks/useGenres';
 import { Platform } from '../../Hooks/useGames';
+import { GameQuery } from '../../App';
 
 const PlatformContainer = styled.div`
   display: flex;
@@ -23,26 +24,25 @@ const PlatformContainer = styled.div`
 `;
 
 interface Props {
-  selectedGenre: Genres | null;
-  selectedPlatform: Platform | null;
+  gameQuery: GameQuery;
 }
 
-const GameCard = ({ selectedGenre, selectedPlatform }: Props) => {
-  const { data, isLoading } = useGames(selectedGenre, selectedPlatform);
+const GameCard = ({ gameQuery }: Props) => {
+  const { data, isLoading } = useGames(gameQuery);
 
   const filteredGames = data.filter((game) => {
-    if (selectedGenre && selectedPlatform) {
+    if (gameQuery.genre && gameQuery.platform) {
       return (
-        game.genres.some((genre) => genre.id === selectedGenre.id) &&
+        game.genres.some((genre) => genre.id === gameQuery.genre?.id) &&
         game.parent_platforms.some(
-          (platform) => platform.platform.id === selectedPlatform.id
+          (platform) => platform.platform.id === gameQuery.platform?.id
         )
       );
-    } else if (selectedGenre) {
-      return game.genres.some((genre) => genre.id === selectedGenre.id);
-    } else if (selectedPlatform) {
+    } else if (gameQuery.genre) {
+      return game.genres.some((genre) => genre.id === gameQuery.genre?.id);
+    } else if (gameQuery.platform) {
       return game.parent_platforms.some(
-        (platform) => platform.platform.id === selectedPlatform.id
+        (platform) => platform.platform.id === gameQuery.platform?.id
       );
     }
     return true;
