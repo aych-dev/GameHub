@@ -14,6 +14,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Genres } from '../../Hooks/useGenres';
+import { Platform } from '../../Hooks/useGames';
 
 const PlatformContainer = styled.div`
   display: flex;
@@ -23,15 +24,26 @@ const PlatformContainer = styled.div`
 
 interface Props {
   selectedGenre: Genres | null;
+  selectedPlatform: Platform | null;
 }
 
-const GameCard = ({ selectedGenre }: Props) => {
-  const { data, isLoading } = useGames(selectedGenre);
-  console.log(data);
+const GameCard = ({ selectedGenre, selectedPlatform }: Props) => {
+  const { data, isLoading } = useGames(selectedGenre, selectedPlatform);
 
   const filteredGames = data.filter((game) => {
-    if (selectedGenre) {
+    if (selectedGenre && selectedPlatform) {
+      return (
+        game.genres.some((genre) => genre.id === selectedGenre.id) &&
+        game.parent_platforms.some(
+          (platform) => platform.platform.id === selectedPlatform.id
+        )
+      );
+    } else if (selectedGenre) {
       return game.genres.some((genre) => genre.id === selectedGenre.id);
+    } else if (selectedPlatform) {
+      return game.parent_platforms.some(
+        (platform) => platform.platform.id === selectedPlatform.id
+      );
     }
     return true;
   });
