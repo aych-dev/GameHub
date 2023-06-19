@@ -7,11 +7,19 @@ import { useState } from 'react';
 import { Genres } from './Hooks/useGenres';
 import PlatformMenu from './Components/Main/PlatformMenu';
 import { Platform } from './Hooks/useGames';
+import SortingMenu from './Components/Main/SortingMenu';
+import styled from 'styled-components';
 
 export interface GameQuery {
   genre: Genres | null;
   platform: Platform | null;
+  sortOrder: string;
 }
+
+const MainMenuContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
@@ -29,12 +37,19 @@ function App() {
           <Navbar />
         </GridItem>
         <GridItem area={'main'}>
-          <PlatformMenu
-            selectedPlatform={gameQuery.platform}
-            onSelectedPlatform={(platform) =>
-              setGameQuery({ ...gameQuery, platform })
-            }
-          />
+          <MainMenuContainer>
+            <PlatformMenu
+              selectedPlatform={gameQuery.platform}
+              onSelectedPlatform={(platform) =>
+                setGameQuery({ ...gameQuery, platform })
+              }
+            />
+            <SortingMenu
+              onSelectSortOrder={(sortOrder) =>
+                setGameQuery({ ...gameQuery, sortOrder })
+              }
+            />
+          </MainMenuContainer>
           <GameCard gameQuery={gameQuery} />
         </GridItem>
         <GridItem area={'aside'}>

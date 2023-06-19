@@ -8,19 +8,30 @@ const SortingContainer = styled.div`
 `;
 
 const sortingList = [
-  'Relevance',
-  'Date Added',
-  'Name',
-  'Release Date',
-  'Popularity',
-  'Average Rating',
+  { value: '', label: 'Relevance' },
+  { value: '-added', label: 'Date Added' },
+  { value: 'name', label: 'Name' },
+  { value: '-released', label: 'Release Date' },
+  { value: '-metacritic', label: 'Popularity ' },
+  { value: '-rating', label: 'Average Rating' },
 ];
 
-const sortingElement = sortingList.map((list) => {
-  return <MenuItem>{list}</MenuItem>;
-});
+interface Props {
+  onSelectSortOrder: (sortOrder: string) => void;
+}
 
-const SortingMenu = () => {
+const SortingMenu = ({ onSelectSortOrder }: Props) => {
+  const sortingElement = sortingList.map((list) => {
+    return (
+      <MenuItem
+        onClick={() => onSelectSortOrder(list.value)}
+        value={list.value}
+        key={list.value}
+      >
+        {list.label}
+      </MenuItem>
+    );
+  });
   return (
     <SortingContainer>
       <Menu>

@@ -12,7 +12,8 @@ app.listen(PORT, () => console.log('Server is running'));
 app.get('/games', async (req, res) => {
   try {
     const { data } = await axios.get(
-      `https://api.rawg.io/api/games?key=${process.env.API_KEY}`
+      `https://api.rawg.io/api/games?key=${process.env.API_KEY}`,
+      { params: req.query }
     );
     res.json(data);
   } catch (err) {
