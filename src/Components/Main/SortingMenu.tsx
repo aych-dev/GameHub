@@ -18,9 +18,10 @@ const sortingList = [
 
 interface Props {
   onSelectSortOrder: (sortOrder: string) => void;
+  sortOrder: string;
 }
 
-const SortingMenu = ({ onSelectSortOrder }: Props) => {
+const SortingMenu = ({ onSelectSortOrder, sortOrder }: Props) => {
   const sortingElement = sortingList.map((list) => {
     return (
       <MenuItem
@@ -32,10 +33,15 @@ const SortingMenu = ({ onSelectSortOrder }: Props) => {
       </MenuItem>
     );
   });
+
+  const sortingLabel = sortingList.find((order) => order.value === sortOrder);
+
   return (
     <SortingContainer>
       <Menu>
-        <MenuButton as={Button}>Order by: Relevance</MenuButton>
+        <MenuButton as={Button}>
+          Order by: {sortingLabel?.label || 'Relevance'}
+        </MenuButton>
         <MenuList>{sortingElement}</MenuList>
       </Menu>
     </SortingContainer>

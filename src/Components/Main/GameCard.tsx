@@ -55,19 +55,10 @@ const GameCard = ({ gameQuery }: Props) => {
     <>
       {isLoading === false ? (
         <Skeleton />
-      ) : data ? (
+      ) : (
         <SimpleGrid columns={4} spacing={5}>
           {gameCard}
         </SimpleGrid>
-      ) : (
-        <Flex align={'center'}>
-          <Card borderTopRadius='20px' marginTop={2}>
-            <CardHeader>No Data</CardHeader>
-            <CardBody>
-              <Text>Select Different Genre</Text>
-            </CardBody>
-          </Card>
-        </Flex>
       )}
     </>
   );

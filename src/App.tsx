@@ -24,8 +24,6 @@ const MainMenuContainer = styled.div`
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
-  console.log(gameQuery);
-
   return (
     <Container maxW={'container.xl'}>
       <Grid
@@ -45,6 +43,7 @@ function App() {
               }
             />
             <SortingMenu
+              sortOrder={gameQuery.sortOrder}
               onSelectSortOrder={(sortOrder) =>
                 setGameQuery({ ...gameQuery, sortOrder })
               }
