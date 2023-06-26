@@ -14,6 +14,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { GameQuery } from '../../App';
+import noImage from '/Users/aych/game-hub/src/assets/noImageAvailable.jpg';
 
 const PlatformContainer = styled.div`
   display: flex;
@@ -31,12 +32,21 @@ const GameCard = ({ gameQuery }: Props) => {
   const gameCard = data.map((game) => (
     <Skeleton key={game.id} isLoaded={isLoading}>
       <Card borderTopRadius='20px' marginTop={2}>
-        <Image
-          borderTopRadius='20px'
-          boxSize={'300px'}
-          objectFit={'cover'}
-          src={game.background_image}
-        />
+        {game.background_image ? (
+          <Image
+            borderTopRadius='20px'
+            boxSize={'300px'}
+            objectFit={'cover'}
+            src={game.background_image}
+          />
+        ) : (
+          <Image
+            borderTopRadius='20px'
+            boxSize={'300px'}
+            objectFit={'cover'}
+            src={noImage}
+          />
+        )}
         <CardBody>
           <SkeletonText isLoaded={isLoading} />
           <PlatformContainer>

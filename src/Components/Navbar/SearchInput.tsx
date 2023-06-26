@@ -1,16 +1,31 @@
 import { Image, Input, InputLeftElement, InputGroup } from '@chakra-ui/react';
-import gameHubIcon from '../Navbar/gamehublogo.webp';
 import { Search2Icon } from '@chakra-ui/icons';
+import { useRef } from 'react';
+import styled from 'styled-components';
 
-const SearchInput = () => {
+interface Props {
+  onSearch: (searchText: string) => void;
+}
+
+const FormContainer = styled.form`
+  width: 100%;
+`;
+
+const SearchInput = ({ onSearch }: Props) => {
+  const ref = useRef<HTMLInputElement>(null);
+
   return (
-    <>
-      <Image boxSize={'45px'} src={gameHubIcon} />
+    <FormContainer
+      onSubmit={(event) => {
+        event.preventDefault();
+        if (ref.current) onSearch(ref.current.value);
+      }}
+    >
       <InputGroup>
         <InputLeftElement children={<Search2Icon />} />
-        <Input placeholder='Search Games...' />
+        <Input ref={ref} placeholder='Search Games...' />
       </InputGroup>
-    </>
+    </FormContainer>
   );
 };
 

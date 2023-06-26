@@ -14,6 +14,7 @@ export interface GameQuery {
   genre: Genres | null;
   platform: Platform | null;
   sortOrder: string;
+  searchText: string;
 }
 
 const MainMenuContainer = styled.div`
@@ -32,7 +33,11 @@ function App() {
       "aside main"`}
       >
         <GridItem area={'nav'}>
-          <Navbar />
+          <Navbar
+            onSearch={(searchText) =>
+              setGameQuery({ ...gameQuery, searchText })
+            }
+          />
         </GridItem>
         <GridItem area={'main'}>
           <MainMenuContainer>

@@ -9,18 +9,24 @@ import {
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 import SearchInput from './SearchInput';
+import gameHubIcon from '../Navbar/gamehublogo.webp';
 
 const DarkModeText = styled.p`
   white-space: nowrap;
 `;
 
-const Navbar = () => {
+interface Props {
+  onSearch: (searchText: string) => void;
+}
+
+const Navbar = ({ onSearch }: Props) => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <>
       <Flex className='mt-1' alignItems={'center'} gap={3}>
-        <SearchInput />
+        <Image boxSize={'45px'} src={gameHubIcon} />
+        <SearchInput onSearch={onSearch} />
         <Switch
           colorScheme='green'
           id='darkMode'
