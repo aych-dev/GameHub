@@ -12,6 +12,8 @@ const GenresList = ({ onSelectGenre, selectedGenre }: Props) => {
   const { data, error, isLoading } = useGenres();
 
   const genreElement = data.map((genre) => {
+    if (error) return null;
+
     return (
       <ListItem key={genre.id}>
         <ListIcon
