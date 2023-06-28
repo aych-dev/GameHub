@@ -9,6 +9,7 @@ export interface Games {
   parent_platforms: { platform: Platform }[];
   metacritic: number;
   genres: Genres[];
+  rating_top: number;
 }
 
 export interface Platform {

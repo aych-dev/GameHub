@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { GameQuery } from '../../App';
 import noImage from '/Users/aych/game-hub/src/assets/noImageAvailable.jpg';
+import Emojis from './Emojis';
 
 const PlatformContainer = styled.div`
   display: flex;
@@ -28,6 +29,7 @@ interface Props {
 
 const GameCard = ({ gameQuery }: Props) => {
   const { data, isLoading } = useGames(gameQuery);
+  console.log(data);
 
   const gameCard = data.map((game) => (
     <Skeleton key={game.id} isLoaded={isLoading}>
@@ -56,7 +58,10 @@ const GameCard = ({ gameQuery }: Props) => {
             <CriticScore metacritic={game.metacritic} />
           </PlatformContainer>
         </CardBody>
-        <CardHeader>{game.name}</CardHeader>
+        <CardHeader>
+          {game.name}
+          <Emojis rating={game.rating_top} />
+        </CardHeader>
       </Card>
     </Skeleton>
   ));
