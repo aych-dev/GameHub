@@ -57,9 +57,7 @@ function App() {
               }
             />
           </MainMenuContainer>
-          <SimpleGrid columns={[1, 2, 3]}>
-            <GameCard gameQuery={gameQuery} />
-          </SimpleGrid>
+          <GameCard gameQuery={gameQuery} />
         </GridItem>
         <Show above='lg'>
           <GridItem area={'aside'}>
