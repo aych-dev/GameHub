@@ -1,6 +1,6 @@
-import meh from '/Users/aych/game-hub/src/assets/meh.webp';
-import bullsEye from '/Users/aych/game-hub/src/assets/bulls-eye.webp';
-import thumbsUp from '/Users/aych/game-hub/src/assets/thumbs-up.webp';
+import meh from './meh.webp';
+import thumbsUp from './thumbs-up.webp';
+import bullsEye from './bulls-eye.webp';
 import { Image, ImageProps } from '@chakra-ui/react';
 
 interface Props {

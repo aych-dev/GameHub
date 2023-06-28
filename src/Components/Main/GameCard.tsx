@@ -14,7 +14,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { GameQuery } from '../../App';
-import noImage from '/Users/aych/game-hub/src/assets/noImageAvailable.jpg';
+import noImage from './noImageAvailable.jpg';
 import Emojis from './Emojis';
 
 const PlatformContainer = styled.div`
