@@ -22,7 +22,7 @@ const useData = <T>(
       const getGenreData = async () => {
         try {
           const { data } = await axios.get<FetchResponse<T>>(
-            `http://localhost:8000/${endpoint}`,
+            `https://aychserver.herokuapp.com/${endpoint}`,
             { signal: controller.signal, ...requestConfig }
           );
           setData(data.results);
