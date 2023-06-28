@@ -38,6 +38,7 @@ const GameCard = ({ gameQuery }: Props) => {
           <Image
             borderTopRadius='20px'
             boxSize={'300px'}
+            width={'100%'}
             objectFit={'cover'}
             src={game.background_image}
           />
