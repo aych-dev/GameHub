@@ -1,4 +1,4 @@
-import { Container, Grid, GridItem, Show } from '@chakra-ui/react';
+import { Container, Grid, GridItem, Show, SimpleGrid } from '@chakra-ui/react';
 import Navbar from './Components/Navbar/Navbar';
 import './index.css';
 import GameCard from './Components/Main/GameCard';
@@ -57,7 +57,9 @@ function App() {
               }
             />
           </MainMenuContainer>
-          <GameCard gameQuery={gameQuery} />
+          <SimpleGrid columns={[1, 2, 3]}>
+            <GameCard gameQuery={gameQuery} />
+          </SimpleGrid>
         </GridItem>
         <Show above='lg'>
           <GridItem area={'aside'}>
