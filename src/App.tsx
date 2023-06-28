@@ -9,6 +9,7 @@ import PlatformMenu from './Components/Main/PlatformMenu';
 import { Platform } from './Hooks/useGames';
 import SortingMenu from './Components/Main/SortingMenu';
 import styled from 'styled-components';
+import GameHeading from './Components/GameHeading';
 
 export interface GameQuery {
   genre: Genres | null;
@@ -40,6 +41,7 @@ function App() {
           />
         </GridItem>
         <GridItem area={'main'}>
+          <GameHeading gameQuery={gameQuery} />
           <MainMenuContainer>
             <PlatformMenu
               selectedPlatform={gameQuery.platform}
