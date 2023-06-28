@@ -22,7 +22,7 @@ const useData = <T>(
       const getGenreData = async () => {
         try {
           const { data } = await axios.get<FetchResponse<T>>(
-            `https://cryptic-anchorage-73113-c632759ca232.herokuapp.com//${endpoint}`,
+            `https://cryptic-anchorage-73113-c632759ca232.herokuapp.com/${endpoint}`,
             { signal: controller.signal, ...requestConfig }
           );
           setData(data.results);
