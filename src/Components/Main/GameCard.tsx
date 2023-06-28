@@ -71,7 +71,7 @@ const GameCard = ({ gameQuery }: Props) => {
       {isLoading === false ? (
         <Skeleton />
       ) : (
-        <SimpleGrid columns={4} spacing={5}>
+        <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 5 }} spacing={5}>
           {gameCard}
         </SimpleGrid>
       )}
