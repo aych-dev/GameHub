@@ -1,4 +1,4 @@
-import { Container, Grid, GridItem } from '@chakra-ui/react';
+import { Container, Grid, GridItem, Show } from '@chakra-ui/react';
 import Navbar from './Components/Navbar/Navbar';
 import './index.css';
 import GameCard from './Components/Main/GameCard';
@@ -59,12 +59,14 @@ function App() {
           </MainMenuContainer>
           <GameCard gameQuery={gameQuery} />
         </GridItem>
-        <GridItem area={'aside'}>
-          <GenresList
-            selectedGenre={gameQuery.genre}
-            onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
-          />
-        </GridItem>
+        <Show above='lg'>
+          <GridItem area={'aside'}>
+            <GenresList
+              selectedGenre={gameQuery.genre}
+              onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+            />
+          </GridItem>
+        </Show>
       </Grid>
     </Container>
   );
