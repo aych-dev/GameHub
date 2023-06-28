@@ -29,9 +29,10 @@ function App() {
   return (
     <Container maxW={'container.xl'}>
       <Grid
-        templateAreas={`
-      "nav nav"
-      "aside main"`}
+        templateAreas={{
+          base: `"nav" "main"`,
+          lg: `"nav nav" "aside main"`,
+        }}
       >
         <GridItem area={'nav'}>
           <Navbar
